@@ -3,6 +3,12 @@ from flask.ext.script import Manager, Shell, Server
 from testeapp import app
 
 manager = Manager(app)
-manager.add.command("runserver", Server())
-manager.add.command("shell", Shell())
+manager.add_command("runserver", Server())
+manager.add_command("shell", Shell())
+
+@manager.command
+def createdb():
+  from testeapp.models import db
+  db.create_all()
+
 manager.run()
