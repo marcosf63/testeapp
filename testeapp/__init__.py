@@ -25,6 +25,9 @@ def message(username):
   user = User.query.filter_by(username=username).first_or_404()
   return render_template('message.html', username=user.username, message=user.message)
 
+@app.errorhandler(404)
+def pag_not_found(e):
+  return render_template('404.html'), 404
 
 if __name__ == '__main__':
   app.run(debug=True)
